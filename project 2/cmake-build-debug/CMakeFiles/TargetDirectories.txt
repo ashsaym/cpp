@@ -1,3 +1,3 @@
-C:/Users/s49166/CLionProjects/hw_2/cmake-build-debug/CMakeFiles/rebuild_cache.dir
-C:/Users/s49166/CLionProjects/hw_2/cmake-build-debug/CMakeFiles/hw_2.dir
-C:/Users/s49166/CLionProjects/hw_2/cmake-build-debug/CMakeFiles/edit_cache.dir
+C:/Users/MdAbuSaym/Documents/GitHub/cpp/project 2/cmake-build-debug/CMakeFiles/rebuild_cache.dir
+C:/Users/MdAbuSaym/Documents/GitHub/cpp/project 2/cmake-build-debug/CMakeFiles/hw_2.dir
+C:/Users/MdAbuSaym/Documents/GitHub/cpp/project 2/cmake-build-debug/CMakeFiles/edit_cache.dir
