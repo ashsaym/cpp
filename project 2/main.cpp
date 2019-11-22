@@ -104,14 +104,15 @@ void ListDelete(Point **List, std::string value)
 void Order_print()
 {
     Point* current = Start;
-    Point *prev = nullptr, *next = nullptr;
+    Point *previous = nullptr;
+    Point *nextPoint = nullptr;
     while (current != nullptr) {
-        next = current->next;
-        current->next = prev;
-        prev = current;
-        current = next;
+        nextPoint = current->next;
+        current->next = previous;
+        previous = current;
+        current = nextPoint;
     }
-    Start = prev;
+    Start = previous;
     Print();
 }
 void Print() {
