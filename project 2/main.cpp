@@ -9,13 +9,13 @@ struct Point {
     struct Point *next;
 };
 struct Point* Start;
-double calculateOrigin(struct Point*);
+double calculateOrigin(Point*);
 Point* Get_New_Point(std::string);
 void Add_Point(std::string);
 void ListDelete(Point **, std::string);
 void Print();
 void Print_Points();
-void Sort();
+Point *Sort();
 
 int main()
 {
@@ -80,7 +80,7 @@ void Add_Point(std::string N) {
     Start = newNode;
 }
 
-void Sort()
+Point *Sort()
 {
     Point * list_end = NULL;
     while(list_end != Start)
@@ -108,8 +108,9 @@ void Sort()
             temp = swap1;
             swap1 = swap1->next;
         }
-        list_end = swap1;
+        list_end = Start;
     }
+    return  Start;
 }
 void ListDelete(Point **List, std::string value)
 {
