@@ -12,10 +12,13 @@ struct Point* Start;
 double calculateOrigin(struct Point*);
 Point* Get_New_Point(std::string);
 void Add_Point(std::string);
+void ListDelete(Point **, std::string);
 void removePoints(std::string);
 void Order_print();
 void Print();
 void Print_Points();
+
+
 
 
 int main()
@@ -35,10 +38,12 @@ int main()
         Print_Points();
         std::cout<<std::endl<<"delete :";
         std::cin>>x;
-        removePoints(x);
+        //removePoints(x);
+        ListDelete(&Start,x);
         Print();
     }
     delete(Start);
+
     return 0;
 }
 
@@ -78,28 +83,29 @@ void Add_Point(std::string N) {
     newNode->next = Start;
     Start = newNode;
 }
-
-void removePoints(std::string remValue) {
-    Point* prev = Start;
-    Point* current = Start->next;
-    while(current != nullptr) {
-        if(current->name == remValue) {
-            break;
+void ListDelete(Point **List, std::string value)
+{
+    Point *current, *previous;
+    previous = nullptr;
+    for (current = *List;current != nullptr;previous = current, current = current->next) {
+        if (current->name == value) {
+            if (previous == nullptr) {
+                *List = current->next;
+            } else {
+                previous->next = current->next;
+            }
+            cout << "Deleting : " << current->name << "\n";
+            if (*List == nullptr){
+                std::cout<<"No Points are in the list. The list is empty.."<<std::endl;
+            }
+            delete(current);
+            return;
+        } else{
+            cout << "Value " << current->name << " does not match " << value << ".\n";
         }
-        else {
-            cout << "Value " << current->name << " does not match " << remValue << ".\n";
-            prev = current;
-            current = current->next;
-        }
-    }
-    if(current == nullptr) {
-        cout << "Can't remove value: no match found.\n";
-    } else {
-        cout << "Deleting: " << current << "\n";
-        prev->next = current->next;
-        delete current;
     }
 }
+
 void Order_print()
 {
     Point* current = Start;
