@@ -1,42 +1,77 @@
 #include <iostream>
 #include <cmath>
+using namespace std;
 
-struct Points{
-    int x,y;
-    double Distance_origin;
-    std::string point_name;
+struct Point {
+    std::string name;
+    int  x,y;
+    double Distances;
+    struct Point *next;
 };
+struct Point* head;
 
-double calculateOrigin(struct Points *ptr){
+double calculateOrigin(struct Point *ptr){
     double fx, fy , dxy;
     fx = (*ptr).x - 0;
     fy = (*ptr).y - 0;
-    (*ptr).Distance_origin = std::sqrt(((fx*fx) + (fy*fy))* 1.0);
-    dxy = (*ptr).Distance_origin;
+    (*ptr).Distances = sqrt(((fx*fx) + (fy*fy))* 1.0);
+    dxy = (*ptr).Distances;
     return dxy;
+};
+
+Point* GetNewNode(std::string N) {
+    Point *newNode;
+    newNode = (Point *) malloc(sizeof(Point));
+    newNode->name = N;
+
+    std::cout<<endl<<"Enter x: ";
+    std::cin>>newNode->x;
+
+    std::cout<<endl<<"Enter y: ";
+    std::cin>>newNode->y;
+    newNode->Distances = calculateOrigin(newNode);
+
+    newNode->next = nullptr;
+    return newNode;
 }
 
 
-int main() {
-    Points *ptr,d[10];
-    ptr = d;
-    for (int i = 0; i < 3; ++i) {
-        std::cout<<"Enter points name :";
-        std::cin>>ptr[i].point_name;
-        std::cout<<std::endl;
-        std::cout<<"Enter x ";
-        std::cin>> ptr[i].x;
-        std::cout<<std::endl;
-        std::cout<<"Enter y :";
-        std::cin>>ptr[i].y;
-        std::cout<<std::endl;
-        ptr[i].Distance_origin = calculateOrigin(&ptr[i]);
-        std::cout<<"Distance from origin :"<<ptr[i].Distance_origin;
-        std::cout<<std::endl;
+
+
+void InsertAtHead(std::string N) {
+    struct Point* newNode = GetNewNode(N);
+    if(head == nullptr) {
+        head = newNode;
+        return;
     }
-    std::cout<<"Point\t"<<"x\t"<<"y\t"<<"distance"<<std::endl;
-    for (int j = 0; j < 3; ++j) {
-        std::cout<<ptr[j].point_name<<"\t"<<ptr[j].x<<"\t"<<ptr[j].y<<"\t"<<ptr[j].Distance_origin<<std::endl;
+    newNode->next = head;
+    head = newNode;
+}
+void Print() {
+    struct Point* temp = head;
+    std::cout<<std::endl;
+    std::cout<<"Point"<<"\t"<<"x"<<"\t"<<"y"<<"\t"<<"distance"<<std::endl;
+    while(temp != nullptr) {
+        std::cout<<temp->name<<"\t"<<temp->x<<"\t"<<temp->y<<"\t"<<temp->Distances<<std::endl;
+        temp = temp->next;
     }
+}
+
+int main()
+{
+    head = nullptr;
+    std::string x;
+    std::cout<<"string describing obstacle (\"end\" for end of input):";
+    std::cin>>x;
+
+    while (x != "end"){
+        InsertAtHead(x);
+        std::cout<<"string describing obstacle (\"end\" for end of input):";
+        std::cin>>x;
+    }
+    Print();
+
+
+
     return 0;
 }
