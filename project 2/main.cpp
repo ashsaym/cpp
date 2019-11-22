@@ -13,10 +13,9 @@ double calculateOrigin(struct Point*);
 Point* Get_New_Point(std::string);
 void Add_Point(std::string);
 void ListDelete(Point **, std::string);
-void Order_print();
 void Print();
 void Print_Points();
-
+void Sort();
 
 int main()
 {
@@ -30,12 +29,14 @@ int main()
         std::cout<<"string describing obstacle (\"end\" for end of input):";
         std::cin>>x;
     }
-    Order_print();
+    Sort();
+    Print();
     while (Start != nullptr){
         Print_Points();
         std::cout<<std::endl<<"delete :";
         std::cin>>x;
         ListDelete(&Start,x);
+        Sort();
         Print();
     }
     delete(Start);
@@ -78,6 +79,38 @@ void Add_Point(std::string N) {
     newNode->next = Start;
     Start = newNode;
 }
+
+void Sort()
+{
+    Point * list_end = NULL;
+    while(list_end != Start)
+    {
+        Point *temp, *swap1;
+        swap1 = Start;
+        while( swap1->next != list_end )
+        {
+            if(swap1->Distances > swap1->next->Distances)
+            {
+                Point *swap2 = swap1->next;
+                swap1->next = swap2->next;
+                swap2->next = swap1;
+                if(swap1 == Start)
+                {
+                    Start = swap2;
+                    swap1 = swap2;
+                }
+                else
+                {
+                    swap1 = swap2;
+                    temp->next = swap2;
+                }
+            }
+            temp = swap1;
+            swap1 = swap1->next;
+        }
+        list_end = swap1;
+    }
+}
 void ListDelete(Point **List, std::string value)
 {
     Point *current, *previous;
@@ -99,21 +132,6 @@ void ListDelete(Point **List, std::string value)
             cout << "Value " << current->name << " does not match " << value << ".\n";
         }
     }
-}
-
-void Order_print()
-{
-    Point* current = Start;
-    Point *previous = nullptr;
-    Point *nextPoint = nullptr;
-    while (current != nullptr) {
-        nextPoint = current->next;
-        current->next = previous;
-        previous = current;
-        current = nextPoint;
-    }
-    Start = previous;
-    Print();
 }
 void Print() {
     struct Point* temp = Start;
