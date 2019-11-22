@@ -9,7 +9,7 @@ struct Point {
     struct Point *next;
 };
 struct Point* Start;
-double calculateOrigin(Point*);
+double calculateOrigin(struct Point*);
 Point* Get_New_Point(std::string);
 void Add_Point(std::string);
 void ListDelete(Point **, std::string);
@@ -108,9 +108,9 @@ Point *Sort()
             temp = swap1;
             swap1 = swap1->next;
         }
-        list_end = Start;
+        list_end = swap1;
     }
-    return  Start;
+    return  list_end;
 }
 void ListDelete(Point **List, std::string value)
 {
