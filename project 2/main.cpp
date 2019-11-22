@@ -13,12 +13,9 @@ double calculateOrigin(struct Point*);
 Point* Get_New_Point(std::string);
 void Add_Point(std::string);
 void ListDelete(Point **, std::string);
-void removePoints(std::string);
 void Order_print();
 void Print();
 void Print_Points();
-
-
 
 
 int main()
@@ -38,13 +35,11 @@ int main()
         Print_Points();
         std::cout<<std::endl<<"delete :";
         std::cin>>x;
-        //removePoints(x);
         ListDelete(&Start,x);
         Print();
     }
     delete(Start);
-
-    return 0;
+    return EXIT_SUCCESS;
 }
 
 
