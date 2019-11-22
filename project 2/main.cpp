@@ -21,7 +21,7 @@ double calculateOrigin(struct Point *ptr){
 
 Point* GetNewNode(std::string N) {
     Point *newNode;
-    newNode = (Point *) malloc(sizeof(Point));
+    newNode = new Point;
     newNode->name = N;
 
     std::cout<<endl<<"Enter x: ";
@@ -34,9 +34,6 @@ Point* GetNewNode(std::string N) {
     newNode->next = nullptr;
     return newNode;
 }
-
-
-
 
 void InsertAtHead(std::string N) {
     struct Point* newNode = GetNewNode(N);
