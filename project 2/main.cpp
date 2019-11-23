@@ -19,28 +19,7 @@ void deleteList(Point**);
 void Print();
 void Print_Points();
 Point *Sort();
-
-
-string Nearest(Point* Near){
-    int min = INT_MAX;
-    string sm;
-    double d;
-    Point* temp = Start;
-    while (temp!= nullptr){
-        if (temp == Near){
-            temp = temp->next;
-        } else{
-            d = Euclidian_distance(Near,temp);
-            if (min > d){
-                min = d;
-                sm = temp->name;
-            }
-            temp = temp->next;
-        }
-    }
-    return  sm;
-}
-
+string Nearest(Point*);
 
 
 int main()
@@ -155,6 +134,27 @@ Point *Sort()
     }
     return  list_end;
 }
+
+string Nearest(Point* Near){
+    int min = INT_MAX;
+    string sm;
+    double d;
+    Point* temp = Start;
+    while (temp!= nullptr){
+        if (temp == Near){
+            temp = temp->next;
+        } else{
+            d = Euclidian_distance(Near,temp);
+            if (min > d){
+                min = d;
+                sm = temp->name;
+            }
+            temp = temp->next;
+        }
+    }
+    return  sm;
+}
+
 void Delete_Point(Point **List, std::string value)
 {
     Point *current, *previous;
@@ -192,8 +192,6 @@ void deleteList(Point** Start)
 }
 void Print() {
     struct Point* temp = Start;
-    double  d;
-
     std::cout<<std::endl;
     while(temp != nullptr) {
         std::cout<<"obstacle "<<temp->name <<" : ("<<temp->x<<","<<temp->y<<")\tdistance : "<< temp->Distances<<"m\t"<<"nearest\t"<<Nearest(temp)<<std::endl;
