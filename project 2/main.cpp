@@ -4,14 +4,14 @@ using namespace std;
 
 struct Point {
     std::string name;
-    int  x,y;
-    double Distances;
+    double x,y, Distances;
     struct Point *next;
 };
 
 struct Point* Start;
 
 double calculateOrigin(struct Point*);
+double Euclidian_distance(Point*, Point*);
 Point* Get_New_Point(std::string);
 void Add_Point(std::string);
 void Delete_Point(Point **, std::string);
@@ -20,34 +20,27 @@ void Print();
 void Print_Points();
 Point *Sort();
 
-double Euclidian_distance(Point * p1 , Point * p2){
-    int x1,x2,y1,y2;
-    double fx,fy,d;
-    x1 = p1->x;
-    x2 = p2->x;
-    y1 = p1->y;
-    y2 = p2->y;
-    fx = pow(((x1)-(x2)), 2);
-    fy = pow(((y1)-(y2)),2);
-    d = sqrt(fx+fy);
-    return d;
-}
 
 string Nearest(Point* Near){
-    double d= 0;
-    std::string sm;
+    int min = INT_MAX;
+    string sm;
+    double d;
     Point* temp = Start;
     while (temp!= nullptr){
         if (temp == Near){
             temp = temp->next;
         } else{
             d = Euclidian_distance(Near,temp);
-            sm = temp->name;
+            if (min > d){
+                min = d;
+                sm = temp->name;
+            }
             temp = temp->next;
         }
     }
     return  sm;
 }
+
 
 
 int main()
@@ -88,6 +81,20 @@ double calculateOrigin(struct Point *ptr){
     dxy = (*ptr).Distances;
     return dxy;
 };
+
+
+double Euclidian_distance(Point * p1 , Point * p2){
+    int x1,x2,y1,y2;
+    double fx,fy,d;
+    x1 = p1->x;
+    x2 = p2->x;
+    y1 = p1->y;
+    y2 = p2->y;
+    fx = pow(((x1)-(x2)), 2);
+    fy = pow(((y1)-(y2)),2);
+    d = sqrt(fx+fy);
+    return d;
+}
 
 Point* Get_New_Point(std::string N) {
     Point *newNode;
