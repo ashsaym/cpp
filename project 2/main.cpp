@@ -35,8 +35,8 @@ int main()
         std::cin>>x;
     }
     Start = Sort();
-    Print();
     while (Start != nullptr){
+        Print();
         Print_Points();
         std::cout<<std::endl<<"delete (\"Point\" or \"all\") : ";
         std::cin>>x;
