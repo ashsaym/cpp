@@ -18,7 +18,7 @@ void Delete_Point(Point **, std::string);
 void deleteList(Point**);
 void Print();
 void Print_Points();
-Point *Sort();
+Point *Sort(Point*);
 string Nearest(Point*);
 
 
@@ -34,7 +34,7 @@ int main()
         std::cout<<"string describing obstacle (\"end\" for end of input):";
         std::cin>>x;
     }
-    Start = Sort();
+    Start = Sort(Start);
     while (Start != nullptr){
         Print();
         Print_Points();
@@ -102,7 +102,7 @@ void Add_Point(std::string N) {
     Start = newNode;
 }
 
-Point *Sort()
+Point *Sort(Point* Start)
 {
     Point * list_end = nullptr;
     while(list_end != Start)
