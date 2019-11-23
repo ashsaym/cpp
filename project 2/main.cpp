@@ -27,53 +27,23 @@ double Euclidian_distance(Point * p1 , Point * p2){
     x2 = p2->x;
     y1 = p1->y;
     y2 = p2->y;
-    fx = pow((x1-x2), 2);
-    fy = pow((y1-y2),2);
+    fx = pow(((x1)-(x2)), 2);
+    fy = pow(((y1)-(y2)),2);
     d = sqrt(fx+fy);
     return d;
 }
 
-
-
 string Nearest(Point* Near){
-    double d1,d2,d3 = 0;
+    double d= 0;
     std::string sm;
     Point* temp = Start;
-    Point * Next = nullptr;
     while (temp!= nullptr){
         if (temp == Near){
             temp = temp->next;
         } else{
-            Next = temp->next;
-            if (Next == Near){
-                Next = Next->next;
-                if (Next == nullptr){
-                    Next = Start;
-                }
-                d1 = Euclidian_distance(Near,temp);
-                d2 = Euclidian_distance(Near,Next);
-                d3 = min(d1,d2);
-                if (d3 == d1){
-                    sm = temp->name;
-                }
-                if (d3 == d2){
-                    sm = Next->name;
-                }
-                temp = temp->next;
-            } else{
-                if (Next == nullptr){
-                    Next = Start;
-                }
-                d1 = Euclidian_distance(Near,temp);
-                d2 = Euclidian_distance(Near,Next);
-                if (d3 == d1){
-                    sm = temp->name;
-                }
-                if (d3 == d2){
-                    sm = Next->name;
-                }
-                temp = temp->next;
-            }
+            d = Euclidian_distance(Near,temp);
+            sm = temp->name;
+            temp = temp->next;
         }
     }
     return  sm;
