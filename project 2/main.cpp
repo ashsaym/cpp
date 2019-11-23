@@ -8,14 +8,77 @@ struct Point {
     double Distances;
     struct Point *next;
 };
+
 struct Point* Start;
+
 double calculateOrigin(struct Point*);
 Point* Get_New_Point(std::string);
 void Add_Point(std::string);
-void ListDelete(Point **, std::string);
+void Delete_Point(Point **, std::string);
+void deleteList(Point**);
 void Print();
 void Print_Points();
 Point *Sort();
+
+double Euclidian_distance(Point * p1 , Point * p2){
+    int x1,x2,y1,y2;
+    double fx,fy,d;
+    x1 = p1->x;
+    x2 = p2->x;
+    y1 = p1->y;
+    y2 = p2->y;
+    fx = pow((x1-x2), 2);
+    fy = pow((y1-y2),2);
+    d = sqrt(fx+fy);
+    return d;
+}
+
+
+
+string Nearest(Point* Near){
+    double d1,d2,d3 = 0;
+    std::string sm;
+    Point* temp = Start;
+    Point * Next = nullptr;
+    while (temp!= nullptr){
+        if (temp == Near){
+            temp = temp->next;
+        } else{
+            Next = temp->next;
+            if (Next == Near){
+                Next = Next->next;
+                if (Next == nullptr){
+                    Next = Start;
+                }
+                d1 = Euclidian_distance(Near,temp);
+                d2 = Euclidian_distance(Near,Next);
+                d3 = min(d1,d2);
+                if (d3 == d1){
+                    sm = temp->name;
+                }
+                if (d3 == d2){
+                    sm = Next->name;
+                }
+                temp = temp->next;
+            } else{
+                if (Next == nullptr){
+                    Next = Start;
+                }
+                d1 = Euclidian_distance(Near,temp);
+                d2 = Euclidian_distance(Near,Next);
+                if (d3 == d1){
+                    sm = temp->name;
+                }
+                if (d3 == d2){
+                    sm = Next->name;
+                }
+                temp = temp->next;
+            }
+        }
+    }
+    return  sm;
+}
+
 
 int main()
 {
@@ -29,17 +92,20 @@ int main()
         std::cout<<"string describing obstacle (\"end\" for end of input):";
         std::cin>>x;
     }
-    Sort();
+    Start = Sort();
     Print();
     while (Start != nullptr){
         Print_Points();
-        std::cout<<std::endl<<"delete :";
+        std::cout<<std::endl<<"delete (\"Point\" or \"all\") : ";
         std::cin>>x;
-        ListDelete(&Start,x);
-        Sort();
-        Print();
+        if (x != "all"){
+            Delete_Point(&Start,x);
+        } else{
+            deleteList(&Start);
+        }
     }
     delete(Start);
+    std::cout<<"Exiting the program...";
     return EXIT_SUCCESS;
 }
 
@@ -71,7 +137,7 @@ Point* Get_New_Point(std::string N) {
 }
 
 void Add_Point(std::string N) {
-    struct Point* newNode = Get_New_Point(N);
+    Point* newNode = Get_New_Point(N);
     if(Start == nullptr) {
         Start = newNode;
         return;
@@ -82,7 +148,7 @@ void Add_Point(std::string N) {
 
 Point *Sort()
 {
-    Point * list_end = NULL;
+    Point * list_end = nullptr;
     while(list_end != Start)
     {
         Point *temp, *swap1;
@@ -112,7 +178,7 @@ Point *Sort()
     }
     return  list_end;
 }
-void ListDelete(Point **List, std::string value)
+void Delete_Point(Point **List, std::string value)
 {
     Point *current, *previous;
     previous = nullptr;
@@ -134,18 +200,33 @@ void ListDelete(Point **List, std::string value)
         }
     }
 }
+void deleteList(Point** Start)
+{
+    Point* current = *Start;
+    Point* next;
+
+    while (current != nullptr)
+    {
+        next = current->next;
+        delete(current);
+        current = next;
+    }
+    *Start = nullptr;
+}
 void Print() {
     struct Point* temp = Start;
+    double  d;
+
     std::cout<<std::endl;
     while(temp != nullptr) {
-        std::cout<<"obstacle "<<temp->name <<" : ("<<temp->x<<","<<temp->y<<")\tdistance : "<< temp->Distances<<"m"<<std::endl;
+        std::cout<<"obstacle "<<temp->name <<" : ("<<temp->x<<","<<temp->y<<")\tdistance : "<< temp->Distances<<"m\t"<<"nearest\t"<<Nearest(temp)<<std::endl;
         temp = temp->next;
     }
 }
 void Print_Points() {
     struct Point* temp = Start;
     std::cout<<std::endl;
-    std::cout<<"Delete Point : ";
+    std::cout<<"Points : ";
     while(temp != nullptr) {
         std::cout<<temp->name<<" ";
         temp = temp->next;
