@@ -14,12 +14,12 @@ double calculateOrigin(struct Point*);
 double Euclidian_distance(Point*, Point*);
 Point* Get_New_Point(std::string);
 void Add_Point(std::string);
+Point* Sort(Point*);
+string Nearest(Point*);
 void Delete_Point(Point **, std::string);
 void deleteList(Point**);
 void Print();
 void Print_Points();
-Point *Sort(Point*);
-string Nearest(Point*);
 
 
 int main()
