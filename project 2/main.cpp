@@ -170,11 +170,10 @@ string Nearest(Point* Near){
 
 void Delete_Point(Point** List, std::string value)
 {
-    Point* current;
-    Point* previous;
-    previous = nullptr;
+    Point* current = nullptr;
+    Point* previous = nullptr;
     for (current = *List;current != nullptr;previous = current, current = current->next) {
-        if (current->name == value) {
+        if (current->name == value){
             if (previous == nullptr) {
                 *List = current->next;
             } else {
@@ -194,10 +193,12 @@ void Delete_Point(Point** List, std::string value)
                     EXIT_SUCCESS;
                 }
             }
+            return;
         } else{
-            cout << "Value " << current->name << " does not match " << value << ".\n";
+            cout << "Searching  : " << current->name << " for " << value <<" = Not found" <<".\n";
         }
     }
+
 }
 void deleteList(Point** Start)
 {
