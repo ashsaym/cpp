@@ -1,26 +1,27 @@
 #include <iostream>
 #include <cmath>
+#include <limits>
+
 using namespace std;
 
 struct Point {
     std::string name;
     double x,y, Distances;
-    struct Point *next;
+    Point *next;
 };
 
-struct Point* Start;
-
-double calculateOrigin(struct Point*);
-double Euclidian_distance(Point*, Point*);
+Point* Start;
 Point* Get_New_Point(std::string);
 void Add_Point(std::string);
+double round(double);
+double calculateOrigin(Point*);
+double calculateDistance(Point*, Point*);
 Point* Sort(Point*);
 string Nearest(Point*);
-void Delete_Point(Point **, std::string);
+void Delete_Point(Point**, std::string);
 void deleteList(Point**);
 void Print();
 void Print_Points();
-
 
 int main()
 {
@@ -34,57 +35,68 @@ int main()
         std::cout<<"string describing obstacle (\"end\" for end of input):";
         std::cin>>x;
     }
-    Start = Sort(Start);
-    while (Start != nullptr){
-        Print();
-        Print_Points();
-        std::cout<<std::endl<<"delete (\"Point\" or \"all\") : ";
-        std::cin>>x;
-        if (x != "all"){
-            Delete_Point(&Start,x);
-        } else{
-            deleteList(&Start);
+    if (Start != nullptr){
+        Start = Sort(Start);
+        while (Start != nullptr){
+            Print();
+            std::cout<<std::endl<<"delete (";
+            Print_Points();
+            std::cout<<" or \"all\") : ";
+            std::cin>>x;
+            if (x != "all"){
+                Delete_Point(&Start,x);
+            } else{
+                deleteList(&Start);
+            }
         }
+    } else{
+        Print();
+        main();
     }
     delete(Start);
+    std::cout<<"\nAll data has been deleted...";
     std::cout<<"Exiting the program...";
     return EXIT_SUCCESS;
 }
 
+double round(double var)
+{
+    double value = (int)(var * 100 + .5);
+    return (double)value / 100;
+}
 
-double calculateOrigin(struct Point *ptr){
+double calculateOrigin(Point* ptr){
     double fx, fy , dxy;
-    fx = (*ptr).x - 0;
-    fy = (*ptr).y - 0;
-    (*ptr).Distances = sqrt(((fx*fx) + (fy*fy))* 1.0);
-    dxy = (*ptr).Distances;
+    fx = pow(((ptr->x)-0), 2);
+    fy = pow(((ptr->y)-0),2);
+    dxy = round(sqrt(fx+fy));
     return dxy;
 };
 
 
-double Euclidian_distance(Point * p1 , Point * p2){
-    int x1,x2,y1,y2;
+double calculateDistance(Point* p1 , Point* p2){
     double fx,fy,d;
-    x1 = p1->x;
-    x2 = p2->x;
-    y1 = p1->y;
-    y2 = p2->y;
-    fx = pow(((x1)-(x2)), 2);
-    fy = pow(((y1)-(y2)),2);
-    d = sqrt(fx+fy);
+    fx = pow(((p1->x)-(p2->x)), 2);
+    fy = pow(((p1->y)-(p2->y)),2);
+    d = round(sqrt(fx+fy));
     return d;
 }
 
 Point* Get_New_Point(std::string N) {
-    Point *newNode;
+    Point* newNode;
     newNode = new Point;
     newNode->name = N;
 
-    std::cout<<endl<<"Enter X : ";
-    std::cin>>newNode->x;
-
-    std::cout<<"Y : ";
-    std::cin>>newNode->y;
+    std::cout<<endl<<"x and y coordinate : ";
+    std::cin>>newNode->x>>newNode->y;
+    while(std::cin.fail())
+    {
+        std::cout << "Invalid coordinate.. Please enter valid coordinates.."<< std::endl;
+        std::cin.clear();
+        std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+        std::cout<<endl<<"x and y coordinate : ";
+        std::cin>>newNode->x>>newNode->y;
+    }
     newNode->Distances = calculateOrigin(newNode);
     std::cout<<std::endl;
 
@@ -102,35 +114,36 @@ void Add_Point(std::string N) {
     Start = newNode;
 }
 
-Point *Sort(Point* Start)
+Point* Sort(Point* Start)
 {
-    Point * list_end = nullptr;
+    Point* list_end = nullptr;
     while(list_end != Start)
     {
-        Point *temp, *swap1;
-        swap1 = Start;
-        while( swap1->next != list_end )
+        Point* temp;
+        Point* swap;
+        swap = Start;
+        while( swap->next != list_end )
         {
-            if(swap1->Distances > swap1->next->Distances)
+            if(swap->Distances > swap->next->Distances)
             {
-                Point *swap2 = swap1->next;
-                swap1->next = swap2->next;
-                swap2->next = swap1;
-                if(swap1 == Start)
+                Point* swap_next = swap->next;
+                swap->next = swap_next->next;
+                swap_next->next = swap;
+                if(swap == Start)
                 {
-                    Start = swap2;
-                    swap1 = swap2;
+                    Start = swap_next;
+                    swap = swap_next;
                 }
                 else
                 {
-                    swap1 = swap2;
-                    temp->next = swap2;
+                    swap = swap_next;
+                    temp->next = swap_next;
                 }
             }
-            temp = swap1;
-            swap1 = swap1->next;
+            temp = swap;
+            swap = swap->next;
         }
-        list_end = swap1;
+        list_end = swap;
     }
     return  list_end;
 }
@@ -144,7 +157,7 @@ string Nearest(Point* Near){
         if (temp == Near){
             temp = temp->next;
         } else{
-            d = Euclidian_distance(Near,temp);
+            d = calculateDistance(Near,temp);
             if (min > d){
                 min = d;
                 sm = temp->name;
@@ -155,9 +168,10 @@ string Nearest(Point* Near){
     return  sm;
 }
 
-void Delete_Point(Point **List, std::string value)
+void Delete_Point(Point** List, std::string value)
 {
-    Point *current, *previous;
+    Point* current;
+    Point* previous;
     previous = nullptr;
     for (current = *List;current != nullptr;previous = current, current = current->next) {
         if (current->name == value) {
@@ -167,11 +181,19 @@ void Delete_Point(Point **List, std::string value)
                 previous->next = current->next;
             }
             cout << "Deleting : " << current->name << "\n";
+            delete(current);
             if (*List == nullptr){
                 std::cout<<"No Points are in the list. The list is empty.."<<std::endl;
+                std::cout<<R"(Want to start again ? ("yes" / "no"))";
+                string y;
+                cin>>y;
+                if (y == "yes"){
+                    main();
+                } else{
+                    delete(Start);
+                    EXIT_SUCCESS;
+                }
             }
-            delete(current);
-            return;
         } else{
             cout << "Value " << current->name << " does not match " << value << ".\n";
         }
@@ -188,22 +210,25 @@ void deleteList(Point** Start)
         delete(current);
         current = next;
     }
+    *Start = current;
     *Start = nullptr;
+    std::cout<<"\n List has been deleted.";
 }
 void Print() {
-    struct Point* temp = Start;
+    Point* temp = Start;
     std::cout<<std::endl;
+    if (temp == nullptr){
+        std::cout<<"List is empty"<<std::endl;
+    }
     while(temp != nullptr) {
-        std::cout<<"obstacle "<<temp->name <<" : ("<<temp->x<<","<<temp->y<<")\tdistance : "<< temp->Distances<<"m\t"<<"nearest\t"<<Nearest(temp)<<std::endl;
+        std::cout<<"obstacle "<<temp->name <<" : ("<<temp->x<<","<<temp->y<<")"<<"\t"<<"distance : "<< temp->Distances<<"m"<<"\t"<<"nearest : "<<Nearest(temp)<<std::endl;
         temp = temp->next;
     }
 }
 void Print_Points() {
-    struct Point* temp = Start;
-    std::cout<<std::endl;
-    std::cout<<"Points : ";
+    Point* temp = Start;
     while(temp != nullptr) {
-        std::cout<<temp->name<<" ";
+        std::cout<<temp->name<<",";
         temp = temp->next;
     }
 }
