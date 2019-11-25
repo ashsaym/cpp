@@ -1,12 +1,3 @@
-/*
-Task: H2
-Family Name: Md Abu
-Given Name: Saym
-Matriculation number: 3022015
-Uni-Email: md.saym@stud.uni-due.de
-Course of Studies: ISE SWT
-*/
-
 #include <iostream>
 #include <cmath>
 #include <limits>
