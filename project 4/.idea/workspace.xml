@@ -30,6 +30,8 @@
   <component name="PropertiesComponent">
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="restartRequiresConfirmation" value="false" />
     <property name="settings.editor.selected.configurable" value="preferences.keymap" />
   </component>
   <component name="RunManager">
@@ -52,29 +54,39 @@
     </option>
   </component>
   <component name="WindowStateProjectService">
-    <state width="796" height="442" key="GridCell.Tab.0.bottom" timestamp="1578494246524">
+    <state width="559" height="442" key="GridCell.Tab.0.bottom" timestamp="1578504235728">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
+    <state width="559" height="442" key="GridCell.Tab.0.bottom/0.0.1920.1040/-1024.-186.1024.1240/1920.51.1280.984@0.0.1920.1040" timestamp="1578504235728" />
     <state width="796" height="442" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1578494246524" />
-    <state width="796" height="442" key="GridCell.Tab.0.center" timestamp="1578494246524">
+    <state width="559" height="442" key="GridCell.Tab.0.center" timestamp="1578504235728">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
+    <state width="559" height="442" key="GridCell.Tab.0.center/0.0.1920.1040/-1024.-186.1024.1240/1920.51.1280.984@0.0.1920.1040" timestamp="1578504235728" />
     <state width="796" height="442" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1578494246524" />
-    <state width="796" height="442" key="GridCell.Tab.0.left" timestamp="1578494246524">
+    <state width="559" height="442" key="GridCell.Tab.0.left" timestamp="1578504235728">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
+    <state width="559" height="442" key="GridCell.Tab.0.left/0.0.1920.1040/-1024.-186.1024.1240/1920.51.1280.984@0.0.1920.1040" timestamp="1578504235728" />
     <state width="796" height="442" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1578494246524" />
-    <state width="796" height="442" key="GridCell.Tab.0.right" timestamp="1578494246524">
+    <state width="559" height="442" key="GridCell.Tab.0.right" timestamp="1578504235728">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
+    <state width="559" height="442" key="GridCell.Tab.0.right/0.0.1920.1040/-1024.-186.1024.1240/1920.51.1280.984@0.0.1920.1040" timestamp="1578504235728" />
     <state width="796" height="442" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1578494246524" />
-    <state x="461" y="163" key="SettingsEditor" timestamp="1578318883020">
+    <state x="461" y="163" key="SettingsEditor" timestamp="1578498697952">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
+    <state x="461" y="163" key="SettingsEditor/0.0.1920.1040/-1024.-186.1024.1240/1920.51.1280.984@0.0.1920.1040" timestamp="1578498697952" />
     <state x="461" y="163" key="SettingsEditor/0.0.1920.1040@0.0.1920.1040" timestamp="1578318883020" />
-    <state x="656" y="345" key="com.intellij.ide.util.TipDialog" timestamp="1578317936582">
+    <state x="656" y="345" key="com.intellij.ide.util.TipDialog" timestamp="1578495765241">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
+    <state x="656" y="345" key="com.intellij.ide.util.TipDialog/0.0.1920.1040/-1024.-186.1024.1240/1920.51.1280.984@0.0.1920.1040" timestamp="1578495765241" />
     <state x="656" y="345" key="com.intellij.ide.util.TipDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1578317936582" />
+    <state x="616" y="240" key="run.anything.popup" timestamp="1578498866154">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="616" y="240" key="run.anything.popup/0.0.1920.1040/-1024.-186.1024.1240/1920.51.1280.984@0.0.1920.1040" timestamp="1578498866154" />
   </component>
 </project>
