@@ -1,4 +1,4 @@
-# Install script for directory: C:/Users/MdAbuSaym/Documents/GitHub/cpp/project 4
+# Install script for directory: C:/Users/saym/OneDrive/Documents/GitHub/cpp/project 4
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
@@ -40,5 +40,5 @@ endif()
 
 string(REPLACE ";" "\n" CMAKE_INSTALL_MANIFEST_CONTENT
        "${CMAKE_INSTALL_MANIFEST_FILES}")
-file(WRITE "C:/Users/MdAbuSaym/Documents/GitHub/cpp/project 4/cmake-build-debug/${CMAKE_INSTALL_MANIFEST}"
+file(WRITE "C:/Users/saym/OneDrive/Documents/GitHub/cpp/project 4/cmake-build-debug/${CMAKE_INSTALL_MANIFEST}"
      "${CMAKE_INSTALL_MANIFEST_CONTENT}")
