@@ -52,21 +52,25 @@
     </option>
   </component>
   <component name="WindowStateProjectService">
-    <state width="535" height="442" key="GridCell.Tab.0.bottom" timestamp="1578564589582">
+    <state width="897" height="442" key="GridCell.Tab.0.bottom" timestamp="1578642928657">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="535" height="442" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1578564589582" />
-    <state width="535" height="442" key="GridCell.Tab.0.center" timestamp="1578564589582">
+    <state width="897" height="442" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1578642928657" />
+    <state width="897" height="442" key="GridCell.Tab.0.center" timestamp="1578642928657">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="535" height="442" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1578564589582" />
-    <state width="535" height="442" key="GridCell.Tab.0.left" timestamp="1578564589582">
+    <state width="897" height="442" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1578642928657" />
+    <state width="897" height="442" key="GridCell.Tab.0.left" timestamp="1578642928657">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="535" height="442" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1578564589582" />
-    <state width="535" height="442" key="GridCell.Tab.0.right" timestamp="1578564589582">
+    <state width="897" height="442" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1578642928657" />
+    <state width="897" height="442" key="GridCell.Tab.0.right" timestamp="1578642928657">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="535" height="442" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1578564589582" />
+    <state width="897" height="442" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1578642928657" />
+    <state x="221" y="164" key="refactoring.ChangeSignatureDialog" timestamp="1578600929811">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="221" y="164" key="refactoring.ChangeSignatureDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1578600929811" />
   </component>
 </project>
