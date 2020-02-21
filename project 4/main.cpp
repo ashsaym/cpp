@@ -1,4 +1,14 @@
+/*
+Task: H4
+Family Name: Saym
+Given Name: Md Abu
+Matriculation number: 3022015
+Uni-Email: md.saym@stud.uni-due.de
+Course of Studies: ISE CE SWT
+*/
+
 #include <iostream>
+
 enum  timeZones : unsigned int {
     ACT,CET,CST,EST,GMT,MSK,PST,UTC
 };
@@ -6,75 +16,65 @@ enum arrivalDeparture {
     arrival,departure
 };
 
-class LocalTime;
-class Flight;
-class Airport;
-
-std::ostream& operator<<(std::ostream& , LocalTime&);
-
-
-int main() {
-    int temp , hours,minute;
-    std::cin>> temp;
-    hours = temp / 60;
-    minute = temp % 60;
-    std::cout << temp<<"\t" << hours<<"\t"  << minute<<std::endl;
-    return 0;
-}
-
 class LocalTime{
 private:
-    int minutes;
-    timeZones TimeZone;
+    int LT_minutes;
+    timeZones LT_timeZones;
 public:
     LocalTime(){
-        minutes = -1;
-        TimeZone = CET;
-    }
-    LocalTime(int hour, int minute, timeZones TimeZone = CET){
-        set_time(hour,minute);
-        get_hour();
-        get_minute();
-        is_valid ();
+        LT_minutes = -1;
+        LT_timeZones = CET;
     }
 
-    void set_time (int hour , int minute){
-        bool validHours,validMinutes;
-        validHours = hour >= 0 && hour <= 24;
-        validMinutes= minute >= 0 && hour <= 60;
-        if (!validHours){
-            hour = -1;
-            std::cout<<std::endl<<"Please enter valid hours"<<std::endl;
-        }
-        if (!validMinutes){
-            minute = -1;
-            std::cout<<std::endl<<"Please enter valid minutes"<<std::endl;
-        }
-    };
-    int get_hour (){
-        int hours;
-        hours = minutes / 60;
-        return hours;
-    };
-
-    int get_minute(){
-        int temp_minutes;
-        temp_minutes = minutes % 60;
-        return temp_minutes;
-    };
-    bool is_valid (){
-        bool valid = false;
-        if (minutes<= 24*60 && minutes<=0){
-            valid = true;
-        } else{
-            std::cout<<std::endl<<"Please enter valid time";
-        }
-        return valid;
-    };
+    LocalTime(int,int,timeZones);
+    void set_time (int , int );
+    int get_hour ();
+    int get_minute();
+    bool is_valid ();
 };
 
+LocalTime:: LocalTime(int hour,int minute,timeZones TZ=CET) {
+    set_time(hour,minute);
+    LT_timeZones=TZ;
+}
+
+void LocalTime::set_time(int hour, int minute) {
+    bool validHours,validMinutes;
+    validHours = hour >= 0 && hour < 24;
+    validMinutes= minute >= 0 && minute < 60;
+    if (!validHours){
+        hour = -1;
+        std::cout<<std::endl<<"Please enter valid hours"<<std::endl;
+    }
+    if (!validMinutes){
+        minute = -1;
+        std::cout<<std::endl<<"Please enter valid minutes"<<std::endl;
+    }
+    if (validHours && validMinutes){
+        LT_minutes = (hour*60)+minute;
+    }
+}
+
+int LocalTime::get_hour() {
+    int temp_hours;
+    temp_hours = LT_minutes / 60;
+    return temp_hours;
+}
+
+int LocalTime::get_minute() {
+    int temp_minutes;
+    temp_minutes = LT_minutes % 60;
+    return temp_minutes;
+}
+
+bool LocalTime::is_valid() {
+    return LT_minutes <= 24 * 60 && LT_minutes >= 0;
+}
+
 std::ostream& operator<<(std::ostream& output, LocalTime& localTime){
-    output<<localTime.get_hour()<<":"<<localTime.get_minute();
+    if(localTime.is_valid()){
+        output<<localTime.get_hour()<<":"<<localTime.get_minute();
+    }
     return output;
 }
 
@@ -84,7 +84,7 @@ private:
     std::string code, destination,gate,checkIn,comment;
     LocalTime expected;
 public:
-    Flight(arrivalDeparture arrivalOrDeparture, std::string code, std::string destination, std::string gate, std::string checkIn=" ");
+    Flight(arrivalDeparture,std::string, std::string, std::string, std::string ,std::string);
     ~Flight();
     std::string get_code();
     std::string get_destination();
@@ -92,108 +92,211 @@ public:
     std::string get_checkIn();
     std::string get_comment();
     LocalTime get_scheduled();
-    void set_expected(LocalTime expected);
-    void set_comment(std::string comment);
+    void set_expected(LocalTime);
+    void set_comment(std::string );
     bool is_arrival();
     bool is_departure();
-    void print(LocalTime expected);
+    void print(LocalTime);
 };
 
-Flight::Flight(arrivalDeparture arrivalOrDeparture, std::string code, std::string destination, std::string gate,
-               std::string checkIn) {
-    arrivalOrDeparture = arrivalOrDeparture;
-    code = code;
-    destination = destination;
-    gate = gate;
-    checkIn = checkIn;
-    comment = comment.empty();
+Flight::Flight(arrivalDeparture F_status,std::string F_code, std::string F_destination, std::string F_gate,
+               std::string F_checkIn , std::string F_comment = "") {
+    arrivalOrDeparture = F_status;
+    code = F_code;
+    destination = F_destination;
+    gate = F_gate;
+    checkIn = F_checkIn;
+    comment = F_comment;
 }
 
 Flight::~Flight() {
-    std::cout<<code<<std::endl;
+    std::cout<<std::endl<<code<<"\tdeleted";
 }
 
 std::string Flight::get_code() {
-    return std::string();
+    return code;
 }
 
 std::string Flight::get_destination() {
-    return std::string();
+    return destination;
 }
 
 std::string Flight::get_gate() {
-    return std::string();
+    return gate;
 }
 
 std::string Flight::get_checkIn() {
-    return std::string();
+    return checkIn;
 }
 
 std::string Flight::get_comment() {
-    return std::string();
+    return comment;
 }
 
 LocalTime Flight::get_scheduled() {
-    return LocalTime();
+    return expected;
 }
 
-void Flight::set_expected(LocalTime expected) {
-
+void Flight::set_expected(LocalTime F_expected) {
+    expected = F_expected;
 }
 
-void Flight::set_comment(std::string comment) {
-
+void Flight::set_comment(std::string F_comment) {
+    comment=F_comment;
 }
 
 bool Flight::is_arrival() {
-    return false;
+    return arrivalOrDeparture == arrival;
 }
 
 bool Flight::is_departure() {
-    return false;
+    return arrivalOrDeparture == departure;
 }
 
-void Flight::print(LocalTime expected) {
-    std::cout<<arrivalOrDeparture<<"\t"<<expected<<"\t"<<gate<<"\t"<<checkIn<<"\t"<<comment<<std::endl;
+void Flight::print(LocalTime F_scheduled) {
+    std::cout<<code<<"\t\t"<<destination<<"\t\t"<<F_scheduled<<"\t\t"<<expected<<"\t\t"<<gate<<"\t"<<checkIn<<"\t"<<comment;
 }
+
 
 class Airport{
 private:
     std::string name;
-    Flight * slot [24*60] = {nullptr} ;
+    Flight * slot[24][60];
 public:
     Airport(std::string);
     ~Airport();
-    void schedule(LocalTime , Flight*);
+    void schedule(LocalTime , Flight *);
     void comment(LocalTime , std::string );
     void delay(LocalTime,LocalTime);
+    void print(arrivalDeparture);
 
 };
 
-Airport::Airport(std::string name) {
-
-}
-
-Airport::~Airport() {
-    for (int i = 0; i < 24*60; i++)
+Airport::Airport(std::string airportName) {
+    name = airportName;
+    for (int i = 0; i <= 24; i++)
     {
-        delete slot[i];
+        for (int j = 0; j <= 60; ++j) {
+            slot[i][j] = nullptr;
+        }
     }
 }
 
-void Airport::schedule(LocalTime localTime, Flight * slot) {
-    slot = slot;
+Airport::~Airport() {
+    for (int i = 0; i < 24; i++)
+    {
+        for (int j = 0; j < 60; ++j) {
+            delete slot[i][j];
+        }
+    }
 }
 
-void Airport::comment(LocalTime localTime, std::string comment) {
-    comment = comment;
+void Airport::schedule(LocalTime A_LocalTime, Flight * A_slot) {
+    int hour = A_LocalTime.get_hour();
+    int  minute = A_LocalTime.get_minute();
+    slot[hour][minute] = A_slot;
 }
 
-void Airport::delay(LocalTime localTime_1, LocalTime localTime_2) {
-    LocalTime temp = localTime_1;
-    localTime_1=localTime_2;
+void Airport::comment(LocalTime A_LocalTime, std::string A_comment) {
+    int hour = A_LocalTime.get_hour();
+    int  minute = A_LocalTime.get_minute();
+    slot[hour][minute] -> Flight::set_comment(A_comment);
 }
 
+void Airport::delay(LocalTime A_LocalTime_1, LocalTime A_LocalTime_2) {
+    int hour , minute;
+    hour= A_LocalTime_1.get_hour();
+    minute = A_LocalTime_1.get_minute();
+    slot[hour][minute] -> set_expected(A_LocalTime_2);
+}
+
+void Airport::print(arrivalDeparture status) {
+    if(status==arrival)
+    {
+        std::cout<<name<<" arrival"<<std::endl;
+        std::cout<<"==========================="<<std::endl;
+        std::cout<<"Flight"<<"\t\t"<<"From"<<"\t\t\t"<<"Scheduled"<<"\t"<<"Expected"<<"\t"<<"Gate"<<"\t"<<"Check-in"<<"\t"<<"Comments"<<std::endl;
+    }
+    if(status==departure)
+    {
+        std::cout<<std::endl<<name<<" departure"<< std::endl;
+        std::cout<<"==========================="<<std::endl;
+        std::cout<<"Flight"<<"\t\t"<<"From"<<"\t\t\t"<<"Scheduled"<<"\t"<<"Expected"<<"\t"<<"Gate"<<"\t"<<"Check-in"<<"\t"<<"Comments"<<std::endl;
+    }
+    for(int rows=0;rows<24;rows++){
+        for(int cols=0;cols<64;cols++){
+            if(slot[rows][cols]!=nullptr){
+                LocalTime localTime(rows,cols);
+                if(status==arrival)
+                {
+                    if(slot[rows][cols]->is_arrival()){
+                        slot[rows][cols]->print(localTime);
+                        std::cout<<std::endl;
+                    }
+                }else
+                {
+                    if(slot[rows][cols]->is_departure()){
+                        slot[rows][cols]->print(localTime);
+                        std::cout<<std::endl;
+                    }
+                }
+            }
+        }
+    }
+}
+
+int main() {
+
+    Airport airport_name("Dusseldorf Airport");
+
+    Flight* name_1=new Flight(arrival,"LH 2010","Munich\t","A04 ","");
+    LocalTime schedule_1(12,40);
+    airport_name.schedule(schedule_1,name_1);
+    LocalTime deley_1(13,5);
+    airport_name.delay(schedule_1,deley_1);
 
 
+    Flight* name_2=new Flight(arrival,"EW 9347","Manchester","B04 ","");
+    LocalTime schedule_2(14,50);
+    airport_name.schedule(schedule_2,name_2);
 
+
+    Flight* name_3=new Flight(departure,"AF 1307","Paris\t","B51 ","192-194 ");
+    LocalTime schedule_3(9,10);
+    airport_name.schedule(schedule_3,name_3);
+    airport_name.comment(schedule_3,"departed");
+
+
+    Flight* name_4=new Flight(departure,"SU 2637","Moscow\t","C31 ","252-255 ");
+    LocalTime schedule_4(10,40);
+    airport_name.schedule(schedule_4,name_4);
+    airport_name.comment(schedule_4,"boarding");
+
+
+    Flight* name_5=new Flight(departure,"EW 9466","London-Heathrow","B35 ","151-170 ");
+    LocalTime schedule_5(11,15);
+    airport_name.schedule(schedule_5,name_5);
+
+
+    Flight* name_6=new Flight(departure,"LH 2011","Munich\t","A40 ","115-120 ");
+    LocalTime schedule_6(13,25);
+    airport_name.schedule(schedule_6,name_6);
+    airport_name.comment(schedule_6,"Code Sharing");
+
+
+    Flight* name_7=new Flight(departure,"XQ 959", "Izmir\t","C45 ","240-242 ");
+    LocalTime schedule_7(14,55);
+    airport_name.schedule(schedule_7,name_7);
+    LocalTime deley_2(15,20);
+    airport_name.delay(schedule_7,deley_2);
+
+
+    airport_name.print(arrival);
+    airport_name.print(departure);
+
+    std::cout<<std::endl;
+    std::system("PAUSE");
+    std::system("EXIT");
+
+    return 0;
+}

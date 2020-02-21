@@ -1,3 +1,12 @@
+/*
+Task: H2
+First Name: Md Abu
+Last Name: Saym
+Matriculation number: 3022015
+Uni-Email: md.saym@stud.uni-due.de
+Course of Studies: ISE SWT
+*/
+
 #include <iostream>
 #include <cmath>
 #include <limits>
@@ -222,7 +231,7 @@ void Print() {
         std::cout<<"List is empty"<<std::endl;
     }
     while(temp != nullptr) {
-        std::cout<<"obstacle "<<temp->name <<" : ("<<temp->x<<","<<temp->y<<")"<<"\t"<<"distance : "<< temp->Distances<<"m"<<"\t"<<"nearest : "<<Nearest(temp)<<std::endl;
+        std::cout<<"obstacle "<<temp->name <<" : ("<<temp->x<<","<<temp->y<<")"<<"\t"<<"distance : "<< temp->Distances<<"m"<<"\t"<<"nearest to this : "<<Nearest(temp)<<std::endl;
         temp = temp->next;
     }
 }

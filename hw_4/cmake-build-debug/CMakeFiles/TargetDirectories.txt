@@ -1,3 +1,0 @@
-C:/Users/MdAbuSaym/Documents/GitHub/cpp/hw_4/cmake-build-debug/CMakeFiles/hw_4.dir
-C:/Users/MdAbuSaym/Documents/GitHub/cpp/hw_4/cmake-build-debug/CMakeFiles/edit_cache.dir
-C:/Users/MdAbuSaym/Documents/GitHub/cpp/hw_4/cmake-build-debug/CMakeFiles/rebuild_cache.dir
