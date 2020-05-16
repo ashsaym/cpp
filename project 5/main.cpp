@@ -1,12 +1,3 @@
-/*
-Aufgabe: H5
-Nachname: Saym
-Vorname: Md Abu
-Matrikelnummer: 3022015
-Uni-Email: md.saym@stud.uni-due.de
-Studiengang: ISE CE SWT
-*/
-
 #include <iostream>
 #include <iomanip>
 #include <string>
